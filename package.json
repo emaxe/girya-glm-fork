@@ -1,0 +1,47 @@
+{
+  "name": "girya-glm",
+  "version": "1.2.1",
+  "description": "ГиряGLM — лёгкая программа для смены аккаунтов в ZCode desktop с показом лимитов GLM-5.2 / GLM-5-Turbo",
+  "productName": "ГиряGLM",
+  "main": "main.js",
+  "author": "ГиряGLM",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac",
+    "dist:dmg": "electron-builder --mac dmg",
+    "icon": "node build/icon-gen.js"
+  },
+  "build": {
+    "appId": "com.giryaglm.app",
+    "productName": "ГиряGLM",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**/*",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "icon": "build/icon-512.png",
+      "category": "public.app-category.developer-tools"
+    },
+    "dmg": {
+      "title": "ГиряGLM ${version}",
+      "artifactName": "ГиряGLM-${version}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  }
+}

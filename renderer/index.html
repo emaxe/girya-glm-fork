@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com;" />
+  <title>ГиряGLM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 6.5c0-1.1.9-2 1.5-2h3c.6 0 1.5.9 1.5 2 0 1-.8 1.6-1.4 1.8" />
+            <path d="M10.6 8.3c-.6.2-1.6.8-1.6 1.9" />
+            <path d="M7 11h10c.6 0 1 .4 1 1v6.5c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V12c0-.6.4-1 1-1z" />
+          </svg>
+        </div>
+        <h1 class="title">ГиряGLM</h1>
+      </div>
+
+      <div class="header-right">
+        <span class="tag tag-header" id="zcodeStatus">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">проверка…</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <section class="toolbar">
+      <button id="importBtn" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Импорт
+      </button>
+      <button id="toggleManualBtn" class="btn btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Токен
+      </button>
+      <div class="spacer"></div>
+      <button id="refreshBtn" class="icon-btn" title="Обновить">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      </button>
+    </section>
+
+    <!-- Manual form (collapsible) -->
+    <div id="manualForm" class="manual-form collapsed">
+      <div class="manual-inner">
+        <input id="jwtInput" type="text" placeholder="JWT (apiKey)" spellcheck="false" autocomplete="off" />
+        <div class="manual-row">
+          <input id="labelInput" type="text" placeholder="Имя (необязательно)" spellcheck="false" autocomplete="off" />
+          <button id="addManualBtn" class="btn btn-primary">Добавить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accounts -->
+    <main class="content" id="content">
+      <div class="accounts-list" id="accountsList"></div>
+      <div class="empty-state" id="emptyState">
+        <div class="empty-illustration">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+        </div>
+        <h3 class="empty-title">Нет аккаунтов</h3>
+        <p class="empty-desc">Импортируйте текущий из ZCode<br/>или добавьте JWT вручную.</p>
+      </div>
+    </main>
+
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
