@@ -40,6 +40,11 @@ desktop.ini
 electron-run.log
 nul
 
+# ---------- Иконки — генерируются через `npm run icon` ----------
+build/icon.ico
+build/icon.png
+build/icon-512.png
+
 # ---------- Локальные секреты / данные ----------
 accounts.json
 *.bak

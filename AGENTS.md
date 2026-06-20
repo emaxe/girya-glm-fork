@@ -17,7 +17,7 @@
 > Это форк [HernoBeliEzh/giryaGLM](https://github.com/HernoBeliEzh/giryaGLM).
 > Не для продакшена, не для распространения. Все права на оригинал — у автора оригинального репозитория.
 
-**Стек:** Electron 33, чистый JavaScript (CommonJS), `electron-builder` для сборки `.dmg`.
+**Стек:** Electron 42, чистый JavaScript (CommonJS), `electron-builder` для сборки `.dmg`.
 Никаких фреймворков, бандлеров, TypeScript, ESLint — намеренно минимальный набор.
 Внешний runtime-пакет один — `electron` (+ `electron-builder` как devDep).
 
@@ -49,8 +49,8 @@
 │   └── zcode.js         # Управление процессом ZCode (kill/isRunning/launch)
 ├── build/
 │   ├── icon-gen.js      # Генератор иконок (npm run icon)
-│   ├── icon.png         # 256px
-│   └── icon-512.png     # 512px для DMG
+│   ├── icon.png         # 256px (генерируется, не в git)
+│   └── icon-512.png     # 512px для DMG (генерируется, не в git)
 ├── start.sh             # Интерактивный шелл-лаунчер (меню 1–5/0)
 ├── package.json         # Манифест + конфиг electron-builder
 ├── README.md            # Пользовательская инструкция (запуск/сборка)
@@ -244,7 +244,7 @@ npm run dist:dmg            # electron-builder --mac dmg
 
 Перегенерация иконок: `npm run icon` (`build/icon-gen.js`).
 
-> В `.gitignore` уже исключены `release/`, `*.dmg`, `*.app`, `accounts.json`, `*.bak` — **не коммить** эти артефакты.
+> В `.gitignore` уже исключены `release/`, `*.dmg`, `*.app`, `build/icon.*`, `accounts.json`, `*.bak` — **не коммить** эти артефакты.
 
 ---
 
@@ -270,6 +270,8 @@ npm run dist:dmg            # electron-builder --mac dmg
 5. **Кеш лимитов — 60с** (`LIMITS_TTL_MS` в `main.js`). Кнопка «Обновить» шлёт `force=true` и обходит кеш.
 
 6. **`zcode.killZcode()` через `pkill -f "ZCode"`** — убивает по имени процесса. Если у пользователя запущено несколько приложений с совпадающим именем, это может задеть лишнее. На данный момент это принятое упрощение.
+
+7. **`accounts.json` привязан к машине.** Секрет шифрования `rawCredentials` (в `lib/credentials.js`) выводится из `os.platform() + os.homedir() + username`. Перенос `accounts.json` на другую машину/пользователя/ОС сделает токены нерасшифровываемыми — переключение аккаунта сломается. При переносе нужно импортировать аккаунты заново на новой машине.
 
 ---
 

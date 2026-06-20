@@ -32,7 +32,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false,
+      sandbox: true,
     },
   });
 
@@ -114,6 +114,7 @@ ipcMain.handle('accounts:delete', async (evt, { id }) => {
   });
   if (confirmed.response !== 0) return { ok: false, canceled: true };
   const removed = store.removeAccount(id);
+  limitsCache.delete(id);
   return { ok: removed };
 });
 
@@ -153,6 +154,8 @@ ipcMain.handle('account:switchAndLaunch', async (_evt, { id }) => {
   if (!limits.isValidJwt(acc.apiKey)) {
     return { ok: false, error: 'JWT аккаунта невалиден' };
   }
+
+  limitsCache.clear();
 
   try {
     await zcode.killZcode();

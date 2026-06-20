@@ -83,10 +83,11 @@ class Canvas {
 function drawKettlebell(size) {
   const c = new Canvas(size);
   const s = size;
-  // Цвета — акцент индиго из приложения + мягкий блик.
-  const main = [99, 102, 241];
-  const dark = [76, 79, 184];
-  const hi = [165, 180, 252];
+  // Цвета — брендовая палитра из DESIGN.md / :root (var(--brand) и его производные).
+  // Зелёный --brand #3dbf3d согласован с UI приложения (DESIGN.md запрещает индиго/фиолетовый).
+  const main = [61, 191, 61];    // --brand        #3dbf3d
+  const dark = [51, 160, 51];    // --brand-active #33a033
+  const hi = [98, 214, 98];      // --brand-hover  #62d662
 
   // Тело гири — скруглённый прямоугольник в нижней части.
   const bodyX0 = s * 0.20, bodyX1 = s * 0.80;
